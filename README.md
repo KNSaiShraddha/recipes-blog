@@ -17,7 +17,7 @@ Welcome to **AkshayaPatra**, a food recipes blog created with love and passion f
 - **GitHub Pages**: For hosting the website.
 
 ## How to Use 🚀
-1. Visit the live website: [AkshayaPatra](https://your-username.github.io/recipes-blog)
+1. Visit the live website: [AkshayaPatra](https://KNSaiShraddha.github.io/recipes-blog)
 2. Explore the homepage to find featured recipes.
 3. Click on a recipe to view detailed instructions and ingredients.
 4. Check out the **About** page to learn more about the creator.
