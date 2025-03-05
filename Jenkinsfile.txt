@@ -1,46 +1,34 @@
 pipeline {
     agent any
-    
     environment {
-        TOMCAT_HOME = 'C:\\Tomcat\\apache-tomcat-9.0.100'
-        TOMCAT_PORT = '8081'
+        TOMCAT_PATH = 'C:/Tomcat/apache-tomcat-9.0.100/webapps/ROOT'  // Updated with the correct path
+        TOMCAT_URL = 'http://localhost:8081/manager/text'  // Tomcat Manager URL
     }
-    
     stages {
         stage('Checkout') {
             steps {
-                // Clone the repository from GitHub
-                git 'https://github.com/yourusername/recipes-blog.git'
+                // Checkout the repository to get the project files
+                git 'https://github.com/KNSaiShraddha/recipes-blog.gitt'  // Replace with your repository URL
             }
         }
-
-        stage('Build') {
+        stage('Deploy to Tomcat') {
             steps {
                 script {
-                    // Use Gradle to package your application
-                    sh '''#!/bin/bash
-                        gradle clean build
+                    // Copy the project files to the Tomcat webapps directory
+                    bat '''
+                    xcopy /E /I * %TOMCAT_PATH%
                     '''
                 }
             }
         }
-
-        stage('Deploy to Tomcat') {
-            steps {
-                script {
-                    // Deploy using the Deploy to Container Plugin (or manually using Gradle)
-                    deploy adapters: [tomcat9(credentialsId: 'your-tomcat-credentials', path: '', url: "http://localhost:8081/manager/text")], contextPath: '', war: '**/*.war'
-                }
-            }
-        }
     }
-    
     post {
-        success {
-            echo 'Deployment completed successfully!'
-        }
-        failure {
-            echo 'Deployment failed.'
+        always {
+            // Optionally, clean up the workspace
+            cleanWs()
         }
     }
 }
+
+                 
+       
